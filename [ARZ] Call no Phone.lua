@@ -2,6 +2,7 @@ script_name("CallNoPhone")
 script_author("lilkot")
 script_version(2)
 local sp  = require 'lib.samp.events'
+local dlstatus = require('moonloader').download_status
 
 local keys = {
 	[1] = 2103,
