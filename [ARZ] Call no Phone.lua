@@ -64,6 +64,7 @@ function main()
 		sampAddChatMessage("[Call No Phone]{1faee9} Загружен {ffffff}[by lilkot]", 0xff2400)
 		sampAddChatMessage("[Call No Phone]{1faee9} Загружен {ffffff}[by lilkot]", 0xff2400)
 		sampAddChatMessage("[Call No Phone]{1faee9} Загружен {ffffff}[by lilkot]", 0xff2400)
+		sampAddChatMessage("[Call No Phone]{1faee9} Загружен {ffffff}[by lilkot]", 0xff2400)
 	sampAddChatMessage("[Call No Phone]{1faee9} /call {ffffff}[Номер]", 0xff2400)	-- Выводим сообщение в чат
     wait(-1) -- Устанавливаем бесконечное ожидание
 end
