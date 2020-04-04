@@ -1,6 +1,6 @@
 script_name("CallNoPhone")
 script_author("lilkot")
-script_version(3)
+script_version(1)
 local sp  = require 'lib.samp.events'
 local dlstatus = require('moonloader').download_status
 
@@ -60,11 +60,6 @@ function main()
     update()
 	sampRegisterChatCommand("call", scr)
 	sampAddChatMessage("[Call No Phone]{1faee9} Загружен {ffffff}[by lilkot]", 0xff2400)
-		sampAddChatMessage("[Call No Phone]{1faee9} Загружен {ffffff}[by lilkot]", 0xff2400)
-		sampAddChatMessage("[Call No Phone]{1faee9} Загружен {ffffff}[by lilkot]", 0xff2400)
-		sampAddChatMessage("[Call No Phone]{1faee9} Загружен {ffffff}[by lilkot]", 0xff2400)
-		sampAddChatMessage("[Call No Phone]{1faee9} Загружен {ffffff}[by lilkot]", 0xff2400)
-		sampAddChatMessage("[Call No Phone]{1faee9} Загружен {ffffff}[by lilkot]", 0xff2400)
 	sampAddChatMessage("[Call No Phone]{1faee9} /call {ffffff}[Номер]", 0xff2400)	-- Выводим сообщение в чат
     wait(-1) -- Устанавливаем бесконечное ожидание
 end
