@@ -21,7 +21,7 @@ local keys = {
 
 function update()
     local fpath = os.getenv('TEMP') .. '\\testing_version.json' -- куда будет качаться наш файлик для сравнения версии
-    downloadUrlToFile('https://raw.githubusercontent.com/lilkot/53555/master/update', fpath, function(id, status, p1, p2) -- ссылку на ваш гитхаб где есть строчки которые я ввёл в теме или любой другой сайт
+    downloadUrlToFile('https://raw.githubusercontent.com/lilkot/53555/master/CallNoPhone%20update', fpath, function(id, status, p1, p2) -- ссылку на ваш гитхаб где есть строчки которые я ввёл в теме или любой другой сайт
       if status == dlstatus.STATUS_ENDDOWNLOADDATA then
       local f = io.open(fpath, 'r') -- открывает файл
       if f then
