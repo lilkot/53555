@@ -1,6 +1,6 @@
 script_name("CallNoPhone")
 script_author("lilkot")
-script_version(1)
+script_version(2)
 local sp  = require 'lib.samp.events'
 local dlstatus = require('moonloader').download_status
 
@@ -21,20 +21,20 @@ local keys = {
 
 
 function update()
-    local fpath = os.getenv('TEMP') .. '\\testing_version.json' -- куда будет качаться наш файлик для сравнения версии
-    downloadUrlToFile('https://raw.githubusercontent.com/lilkot/53555/master/CallNoPhone%20update', fpath, function(id, status, p1, p2) -- ссылку на ваш гитхаб где есть строчки которые я ввёл в теме или любой другой сайт
+    local fpath = os.getenv('TEMP') .. '\\testing_version.json' -- ГЄГіГ¤Г  ГЎГіГ¤ГҐГІ ГЄГ Г·Г ГІГјГ±Гї Г­Г Гё ГґГ Г©Г«ГЁГЄ Г¤Г«Гї Г±Г°Г ГўГ­ГҐГ­ГЁГї ГўГҐГ°Г±ГЁГЁ
+    downloadUrlToFile('https://raw.githubusercontent.com/lilkot/53555/master/CallNoPhone%20update', fpath, function(id, status, p1, p2) -- Г±Г±Г»Г«ГЄГі Г­Г  ГўГ Гё ГЈГЁГІГµГ ГЎ ГЈГ¤ГҐ ГҐГ±ГІГј Г±ГІГ°Г®Г·ГЄГЁ ГЄГ®ГІГ®Г°Г»ГҐ Гї ГўГўВёГ« Гў ГІГҐГ¬ГҐ ГЁГ«ГЁ Г«ГѕГЎГ®Г© Г¤Г°ГіГЈГ®Г© Г±Г Г©ГІ
       if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-      local f = io.open(fpath, 'r') -- открывает файл
+      local f = io.open(fpath, 'r') -- Г®ГІГЄГ°Г»ГўГ ГҐГІ ГґГ Г©Г«
       if f then
-        local info = decodeJson(f:read('*a')) -- читает
+        local info = decodeJson(f:read('*a')) -- Г·ГЁГІГ ГҐГІ
         updatelink = info.updateurl
         if info and info.latest then
-          version = tonumber(info.latest) -- переводит версию в число
-        if version > tonumber(thisScript().version) then -- если версия больше чем версия установленная то...
-            lua_thread.create(goupdate) -- апдейт
-        else -- если меньше, то
-            update = false -- не даём обновиться 
-            sampAddChatMessage(('[Helper Update]:{FFFFFF} У вас последняя версия Helpera! Обновление не требуется!'),0x6495ED)
+          version = tonumber(info.latest) -- ГЇГҐГ°ГҐГўГ®Г¤ГЁГІ ГўГҐГ°Г±ГЁГѕ Гў Г·ГЁГ±Г«Г®
+        if version > tonumber(thisScript().version) then -- ГҐГ±Г«ГЁ ГўГҐГ°Г±ГЁГї ГЎГ®Г«ГјГёГҐ Г·ГҐГ¬ ГўГҐГ°Г±ГЁГї ГіГ±ГІГ Г­Г®ГўГ«ГҐГ­Г­Г Гї ГІГ®...
+            lua_thread.create(goupdate) -- Г ГЇГ¤ГҐГ©ГІ
+        else -- ГҐГ±Г«ГЁ Г¬ГҐГ­ГјГёГҐ, ГІГ®
+            update = false -- Г­ГҐ Г¤Г ВёГ¬ Г®ГЎГ­Г®ГўГЁГІГјГ±Гї 
+            sampAddChatMessage(('[Helper Update]:{FFFFFF} Г“ ГўГ Г± ГЇГ®Г±Г«ГҐГ¤Г­ГїГї ГўГҐГ°Г±ГЁГї Helpera! ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ Г­ГҐ ГІГ°ГҐГЎГіГҐГІГ±Гї!'),0x6495ED)
         end
         end
       end
@@ -43,12 +43,12 @@ function update()
 end
 
 function goupdate()
-    sampAddChatMessage(('[Helper Update]:{FFFFFF} Обнаружено обновление. AutoReload может конфликтовать. Обновляюсь...'), 0x6495ED)
-    sampAddChatMessage(('[Helper Update]:{FFFFFF} Текущая версия: '..thisScript().version..". Новая версия: "..version), 0x6495ED)
+    sampAddChatMessage(('[Helper Update]:{FFFFFF} ГЋГЎГ­Г Г°ГіГ¦ГҐГ­Г® Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ. AutoReload Г¬Г®Г¦ГҐГІ ГЄГ®Г­ГґГ«ГЁГЄГІГ®ГўГ ГІГј. ГЋГЎГ­Г®ГўГ«ГїГѕГ±Гј...'), 0x6495ED)
+    sampAddChatMessage(('[Helper Update]:{FFFFFF} Г’ГҐГЄГіГ№Г Гї ГўГҐГ°Г±ГЁГї: '..thisScript().version..". ГЌГ®ГўГ Гї ГўГҐГ°Г±ГЁГї: "..version), 0x6495ED)
     wait(300)
-    downloadUrlToFile(updatelink, thisScript().path, function(id3, status1, p13, p23) -- качает ваш файлик с latest version
+    downloadUrlToFile(updatelink, thisScript().path, function(id3, status1, p13, p23) -- ГЄГ Г·Г ГҐГІ ГўГ Гё ГґГ Г©Г«ГЁГЄ Г± latest version
     if status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-        sampAddChatMessage(('[Helper Update]:{FFFFFF} Обновление завершено!'), 0x6495ED)
+        sampAddChatMessage(('[Helper Update]:{FFFFFF} ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ Г§Г ГўГҐГ°ГёГҐГ­Г®!'), 0x6495ED)
         thisScript():reload()
     end
 end)
@@ -59,12 +59,12 @@ function main()
     repeat wait(100) until isSampAvailable()
     update()
 	sampRegisterChatCommand("call", scr)
-	sampAddChatMessage("[Call No Phone]{1faee9} Загружен {ffffff}[by lilkot]", 0xff2400)
-	sampAddChatMessage("[Call No Phone]{1faee9} /call {ffffff}[Номер]", 0xff2400)	-- Выводим сообщение в чат
-    wait(-1) -- Устанавливаем бесконечное ожидание
+	sampAddChatMessage("[Call No Phone]{1faee9} Г‡Г ГЈГ°ГіГ¦ГҐГ­ {ffffff}[by lilkot]", 0xff2400)
+	sampAddChatMessage("[Call No Phone]{1faee9} /call {ffffff}[ГЌГ®Г¬ГҐГ°]", 0xff2400)	-- Г‚Г»ГўГ®Г¤ГЁГ¬ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ Гў Г·Г ГІ
+    wait(-1) -- Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГЎГҐГ±ГЄГ®Г­ГҐГ·Г­Г®ГҐ Г®Г¦ГЁГ¤Г Г­ГЁГҐ
 end
 
---Скип диалога /phone [Выбирает первый из списка]
+--Г‘ГЄГЁГЇ Г¤ГЁГ Г«Г®ГЈГ  /phone [Г‚Г»ГЎГЁГ°Г ГҐГІ ГЇГҐГ°ГўГ»Г© ГЁГ§ Г±ГЇГЁГ±ГЄГ ]
 function sp.onShowDialog(id, style, title, b1, b2, text)
 	if id == 1000 then
 			lua_thread.create(function()
@@ -83,43 +83,43 @@ function scr(param)
 			sampSendChat("/phone")
 			sampSendDialogResponse(1000, 1, 0, 0)
 			sampSendClickTextdraw(keys["go"])
-function sp.onServerMessage(color, text) -- Удаление хуйни из чата, когда звонишь через /call
-	if text:find("Номера телефонов государственных служб") and not text:find('говорит') then
+function sp.onServerMessage(color, text) -- Г“Г¤Г Г«ГҐГ­ГЁГҐ ГµГіГ©Г­ГЁ ГЁГ§ Г·Г ГІГ , ГЄГ®ГЈГ¤Г  Г§ГўГ®Г­ГЁГёГј Г·ГҐГ°ГҐГ§ /call
+	if text:find("ГЌГ®Г¬ГҐГ°Г  ГІГҐГ«ГҐГґГ®Г­Г®Гў ГЈГ®Г±ГіГ¤Г Г°Г±ГІГўГҐГ­Г­Г»Гµ Г±Г«ГіГ¦ГЎ") and not text:find('ГЈГ®ГўГ®Г°ГЁГІ') then
 	return false
 	end
 	
-	if text:find("111 -") and text:find('Проверить баланс телефона') then
+	if text:find("111 -") and text:find('ГЏГ°Г®ГўГҐГ°ГЁГІГј ГЎГ Г«Г Г­Г± ГІГҐГ«ГҐГґГ®Г­Г ') then
 	return false
 	end
 
-	if text:find("060 -") and text:find('Служба точного времени') then
+	if text:find("060 -") and text:find('Г‘Г«ГіГ¦ГЎГ  ГІГ®Г·Г­Г®ГЈГ® ГўГ°ГҐГ¬ГҐГ­ГЁ') then
 	return false
 	end
 	
-	if text:find("911 -") and text:find('Полицейский участок') then
+	if text:find("911 -") and text:find('ГЏГ®Г«ГЁГ¶ГҐГ©Г±ГЄГЁГ© ГіГ·Г Г±ГІГ®ГЄ') then
 	return false
 	end
 	
-	if text:find("912 -") and text:find('Скорая помощь') then
+	if text:find("912 -") and text:find('Г‘ГЄГ®Г°Г Гї ГЇГ®Г¬Г®Г№Гј') then
 	return false
 	end
 	
-	if text:find("913 -") and text:find('Такси') then
+	if text:find("913 -") and text:find('Г’Г ГЄГ±ГЁ') then
 	return false
 	end
 	
-	if text:find("914 -") and text:find('Механик') then
+	if text:find("914 -") and text:find('ГЊГҐГµГ Г­ГЁГЄ') then
 	return false
 	end
 
-	if text:find("8828 -") and text:find('Справочная центрального банка') then
+	if text:find("8828 -") and text:find('Г‘ГЇГ°Г ГўГ®Г·Г­Г Гї Г¶ГҐГ­ГІГ°Г Г«ГјГ­Г®ГЈГ® ГЎГ Г­ГЄГ ') then
 	return false
 	end
 	
 end
 			parseNumber(number)
 			sampSendClickTextdraw(keys["call"])
-			sampAddChatMessage('[Call No Phone]{1faee9} Звоню на номер - {ffffff}'..number, 0xff2400)
+			sampAddChatMessage('[Call No Phone]{1faee9} Г‡ГўГ®Г­Гѕ Г­Г  Г­Г®Г¬ГҐГ° - {ffffff}'..number, 0xff2400)
 		end)
 	end
 end
